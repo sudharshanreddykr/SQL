@@ -1,0 +1,241 @@
+DB
+
+Records 
+File systems (Flat file, excel) : DBMS
+RDBMS
+
+data loss
+data theft
+data tracking
+
+March
+100     A       1000    D
+101     B       1000    W
+100     A        500    W
+100     A        200    W
+
+April
+100     A       1000    D
+101     B       1000    W
+100     A        500    W
+100     A        200    W
+
+
+Bank A/C
+Personal details
+100     A       A/C details
+101     B       A/C details
+
+Transaction details
+1000    W
+500     W
+1000    D
+
+Normalization
+1NF
+2NF
+
+Course information
+
+Course id      Course name    Instructor name     Instructor contact information
+101                 A               Mike                1234567890
+102                 B               John                9876543222
+103                 C               Mike                1234567890
+
+Mike : 9843212345
+need to update both 101 & 103 information
+
+101 : update
+103 : forgot
+
+entities : separate
+
+course information
+Course id      Course name   id
+101                 A          Mike
+102                 B          2
+103                 C          Mike
+
+Instructor information
+id    Instructor name     Instructor contact
+1    Mike            1234567890
+2    John            9876543222   
+3    Jane            9876543222
+4    Mike
+
+Students
+Student name   Enrollment no   Course id
+A              1000             1,2
+B              1001             2
+C              1002             1,3
+D              1003             1,2,4
+
+
+1NF :
+says that each cell of a table should contain exactly one value : no redundancy
+
+2NF :
+the table should be in the first normal form
+primary key of the table should decompose to exactly one column
+
+
+meta data
+managing relationships
+
+DBMS, RDBMS, No SQL (no relationships)
+
+msSQL
+mySQL
+oracle
+
+Query language
+
+DDL : data definitor language
+DB, TABLE, Functions, Triggers
+CREATE 
+ALTER
+DROP
+
+-- list all databases
+show databases;
+-- create new database
+create database EmployeeDB;
+-- drop/delete database
+drop database EmployeeDB;
+-- select database
+use employeedb;
+
+-- create table
+create table table_name(col_name1 data_type,col_name2 data_type,)
+-- create new table
+create table testTbl(id int, name varchar(100), dob date);
+-- alter table add_column, drop_column, changing_column_definition
+alter table testTbl 
+add email varchar(200);
+
+mdf : master data file
+ldf : log data file
+
+
+DATA TYPE
+int
+char(5) : fixed length : abc  
+varchar(5) : variable length : abc
+float
+double
+boolean
+text
+
+
+DML : data manipulation language
+Insert 
+update
+delete
+
+DQL : data query language
+TQL : transact query language
+
+username : root
+password : your password
+
+
+WHERE CLAUSE
+=
+!= , <>
+>
+<
+>=
+<=
+
+LIKE : wildcards : text
+%
+_
+
+select * from customers where contactFirstName like 'ca%';
+
+a% : data starts with a
+%a : data ends with a
+%a% : data contains a anywhere in text
+_r% : finds any value that have r in the second position
+a%r : find any value that starts with a & ends with r
+
+CONSTRAINTS
+create table table_name(
+    col_name data_type constraints
+)
+
+Error Code: 1048. Column 'id' cannot be null
+Error Code: 1062. Duplicate entry 'test@mail.com' for key 'uniquetest.email'
+Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`employeedb`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`id`))
+Error Code: 1136. Column count doesn't match value count at row 1
+
+
+WHERE 
+AND
+OR
+NOT
+
+JOINS : joining the data from multiple tables
+1st table : LEFT TABLE
+2nd table : RIGHT TABLE
+
+ORDER
+1000    1
+1001    1
+
+CUSTOMER
+1   test    12234923
+2   demo    12312321
+
+
+
+inner join : it'll combine the date from both left table & right table & return the data of only
+those rows which are not null in both left & right table
+
+1000    test
+1001    test
+
+
+left outer join : it'll take all the data from left table & display only the available records in right
+table, whichever data in unavailable in right table it'll displayed as null
+
+1   test    1000
+2   demo    null
+
+right outer join : it'll take all the data from right table & display only the available records in left
+table, whichever data in unavailable in left table it'll displayed as null
+
+JOIN SYNTAX
+select col_name(s)
+from left_table
+join right_table
+on p.k=f.k
+
+3sec : 5s+2s = 7s
+0.0044 sec / 0.00034 sec
+
+define an index on the column that you will generally be using to query the data
+users
+uid : PK
+email : UK : index
+select * from users where email='test@mail.com';
+
+do not add index on any column because whenever we will update the table, the indexes
+also will be updated
+
+create indexes only on columns that will be frequently searched.
+
+0.0020 sec / 0.0017 sec : 110
+0.0015 sec / 0.000040 sec : 40
+
+
+SQL : query language
+run a query
+compiles : 1s & executes : 1s : 2s
+
+QUERY : compilation + execution time
+STORED PROCEDURE : pre-compiled statement : execution time
+
+{ : BEGIN
+
+} : END
